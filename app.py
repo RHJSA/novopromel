@@ -51,4 +51,4 @@ def produtos():
     return render_template('produtos.html', produtos=produtos)
 
 with app.app_context():
-    db.create_all_
+    db.create_all()
