@@ -10,10 +10,18 @@ class Colaborador(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
 
-class Produto(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(100), nullable=False)
-    valor = db.Column(db.Float, nullable=False)
+<form method="POST">
+    <label>Nome:</label><br>
+    <input type="text" name="nome" required><br><br>
+
+    <label>Unidade:</label><br>
+    <input type="text" name="unidade" required><br><br>
+
+    <label>Valor (R$):</label><br>
+    <input type="number" step="0.01" name="valor" required><br><br>
+
+    <button type="submit">Cadastrar Produto</button>
+</form>
 
 class Pedido(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -38,9 +46,9 @@ def produtos():
     if request.method == 'POST':
         nome = request.form['nome']
         unidade = request.form['unidade']
-        tipo = request.form.get('tipo')
+        valor = float(request.form['valor'])
 
-        novo_produto = Produto(nome=nome, unidade=unidade, tipo=tipo)
+        novo_produto = Produto(nome=nome, unidade=unidade, valor=valor)
         db.session.add(novo_produto)
         db.session.commit()
         return redirect('/produtos')
