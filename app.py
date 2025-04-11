@@ -10,18 +10,11 @@ class Colaborador(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
 
-<form method="POST">
-    <label>Nome:</label><br>
-    <input type="text" name="nome" required><br><br>
-
-    <label>Unidade:</label><br>
-    <input type="text" name="unidade" required><br><br>
-
-    <label>Valor (R$):</label><br>
-    <input type="number" step="0.01" name="valor" required><br><br>
-
-    <button type="submit">Cadastrar Produto</button>
-</form>
+class Produto(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    unidade = db.Column(db.String(50), nullable=False)
+    valor = db.Column(db.Float, nullable=False)
 
 class Pedido(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -41,6 +34,7 @@ class PedidoProduto(db.Model):
 def index():
     pedidos = Pedido.query.order_by(Pedido.data.desc()).all()
     return render_template('index.html', pedidos=pedidos)
+
 @app.route('/produtos', methods=['GET', 'POST'])
 def produtos():
     if request.method == 'POST':
@@ -57,7 +51,4 @@ def produtos():
     return render_template('produtos.html', produtos=produtos)
 
 with app.app_context():
-    db.create_all()
-
-if __name__ == '__main__':
-    app.run()
+    db.create_all_
