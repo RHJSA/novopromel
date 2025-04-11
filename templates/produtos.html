@@ -2,10 +2,11 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Produtos</title>
+    <title>Cadastro de Produtos</title>
 </head>
 <body>
     <h1>Cadastro de Produtos</h1>
+
     <form method="POST">
         <label>Nome:</label><br>
         <input type="text" name="nome" required><br><br>
@@ -13,8 +14,8 @@
         <label>Unidade:</label><br>
         <input type="text" name="unidade" required><br><br>
 
-        <label>Tipo:</label><br>
-        <input type="text" name="tipo"><br><br>
+        <label>Valor (R$):</label><br>
+        <input type="number" name="valor" step="0.01" required><br><br>
 
         <button type="submit">Cadastrar Produto</button>
     </form>
@@ -24,10 +25,12 @@
     <h2>Produtos Cadastrados</h2>
     <ul>
         {% for produto in produtos %}
-<li>{{ produto.nome }} ({{ produto.unidade }}) - R$ {{ '%.2f'|format(produto.valor) }}</li>
+            <li>{{ produto.nome }} ({{ produto.unidade }}) - R$ {{ '%.2f'|format(produto.valor) }}</li>
+        {% else %}
+            <li>Nenhum produto cadastrado ainda.</li>
         {% endfor %}
     </ul>
 
-    <a href="/">Voltar para Pedidos</a>
+    <p><a href="/">Voltar para pedidos</a></p>
 </body>
 </html>
