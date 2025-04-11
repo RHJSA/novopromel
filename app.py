@@ -33,6 +33,20 @@ class PedidoProduto(db.Model):
 def index():
     pedidos = Pedido.query.order_by(Pedido.data.desc()).all()
     return render_template('index.html', pedidos=pedidos)
+@app.route('/produtos', methods=['GET', 'POST'])
+def produtos():
+    if request.method == 'POST':
+        nome = request.form['nome']
+        unidade = request.form['unidade']
+        tipo = request.form.get('tipo')
+
+        novo_produto = Produto(nome=nome, unidade=unidade, tipo=tipo)
+        db.session.add(novo_produto)
+        db.session.commit()
+        return redirect('/produtos')
+
+    produtos = Produto.query.all()
+    return render_template('produtos.html', produtos=produtos)
 
 with app.app_context():
     db.create_all()
