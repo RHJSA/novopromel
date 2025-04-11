@@ -24,7 +24,7 @@
     <h2>Produtos Cadastrados</h2>
     <ul>
         {% for produto in produtos %}
-            <li>{{ produto.nome }} ({{ produto.unidade }}) - {{ produto.tipo or "Sem tipo" }}</li>
+<li>{{ produto.nome }} ({{ produto.unidade }}) - R$ {{ '%.2f'|format(produto.valor) }}</li>
         {% endfor %}
     </ul>
 
