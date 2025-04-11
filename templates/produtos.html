@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Cadastro de Produtos</title>
@@ -15,22 +15,25 @@
         <input type="text" name="unidade" required><br><br>
 
         <label>Valor (R$):</label><br>
-        <input type="number" name="valor" step="0.01" required><br><br>
+        <input type="number" step="0.01" name="valor" required><br><br>
 
         <button type="submit">Cadastrar Produto</button>
     </form>
 
     <hr>
 
-    <h2>Produtos Cadastrados</h2>
-    <ul>
-        {% for produto in produtos %}
-            <li>{{ produto.nome }} ({{ produto.unidade }}) - R$ {{ '%.2f'|format(produto.valor) }}</li>
-        {% else %}
-            <li>Nenhum produto cadastrado ainda.</li>
-        {% endfor %}
-    </ul>
+    <h2>Produtos cadastrados</h2>
+    {% if produtos %}
+        <ul>
+            {% for produto in produtos %}
+                <li>{{ produto.nome }} - {{ produto.unidade }} - R$ {{ "%.2f"|format(produto.valor) }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum produto cadastrado ainda.</p>
+    {% endif %}
 
-    <p><a href="/">Voltar para pedidos</a></p>
+    <br>
+    <a href="/">Voltar para início</a>
 </body>
 </html>
